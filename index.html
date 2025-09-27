@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payroll Calculator</title>
+    <link rel="preconnect" href="https://fontos.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <form action="display.html" id="payrollForm">
+    <h1>Payroll Form</h1>
+    <label for="idNum">ID Number: </label><input type="text" id="idNum" class="text input" name="idNum" placeholder="12-345-6" required><br>
+    <label for="lastName">Last Name: </label><input type="text" id="lastName" class="text" name="lastName" placeholder="Bernardo" required><br>
+     <label for="firstName">First Name: </label><input type="text" id="firstName" class="text" name="firstName" placeholder="Jayson" required><br>
+     <label for="middleName">Middle Name: </label><input type="text" id="middleName" class="text" name="middleName" placeholder="Alcantara"><br>
+     <label for="position">Position: </label><input type="text" id="position" class="text" name="position" placeholder="Red Team Op" required><br><br>
+     <label for="rate">Rate(₱): </label><input type="number" id="rate" class="num" name="rate" placeholder="695" required><br>
+     <label for="workingDays">Working Days: </label><input type="number" id="workingDays" class="num" name="workingDays" placeholder="20" required><br>
+      <input type="submit" id="submit" value="Submit">
+  </form>
+  <script>
+  document.getElementById("payrollForm").addEventListener("submit", function(e) {
+    e.preventDefault();
+    localStorage.setItem("idNum", document.getElementById("idNum").value);
+    localStorage.setItem("lastName", document.getElementById("lastName").value);
+    localStorage.setItem("firstName", document.getElementById("firstName").value);
+    localStorage.setItem("middleName", document.getElementById("middleName").value);
+    localStorage.setItem("position", document.getElementById("position").value);
+    localStorage.setItem("rate", document.getElementById("rate").value);
+    localStorage.setItem("workingDays", document.getElementById("workingDays").value);
+    window.location.href = "display.html";
+  });
+</script>
+</body>
+</html>

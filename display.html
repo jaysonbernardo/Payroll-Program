@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payroll Calculator</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <div id="payroll">
+      <h1>Processed Payroll</h1>
+    </div>
+    <script>
+      let idNum = localStorage.getItem("idNum");
+      let lastName = localStorage.getItem("lastName");
+      let firstName = localStorage.getItem("firstName");
+      let middleName = localStorage.getItem("middleName");
+      let position = localStorage.getItem("position");
+      let rate = Number(localStorage.getItem("rate"));
+      let workingDays = localStorage.getItem("workingDays");
+      let grossPay = rate * Number(workingDays);
+      let sss = grossPay * 0.05;
+      let pagIbig = grossPay * 0.03;
+      let philHealth = grossPay * 0.02;
+      let tax = grossPay * 0.05;
+      let totalDeduction = sss + pagIbig + philHealth + tax;
+      let netPay = grossPay - totalDeduction;
+      let payroll = document.getElementById("payroll");
+      function addItem(label, value, indent=false){
+        let p = document.createElement("p");
+        p.classList.add("item");
+        if (indent) p.classList.add("indent");
+        if (typeof(value) === "number"){
+          value = value.toFixed(2);
+          p.innerHTML = `<span class="label">${label}: </span>₱${value}`;
+          payroll.appendChild(p);
+        } else {
+          p.innerHTML = `<span class="label">${label}: </span>${value}`;
+          payroll.appendChild(p);
+        }
+      }
+      addItem("ID", idNum);
+      addItem("Name", `${lastName}, ${firstName} ${middleName}`);
+      addItem("Position", position);
+      payroll.appendChild(document.createElement("br"));
+      addItem("Rate", rate);
+      
+      addItem("Working Days", workingDays);
+      payroll.appendChild(document.createElement("br"));
+      addItem("Gross Pay", grossPay);
+      addItem("Deductions", "");
+      addItem("SSS (5%)", sss, true);
+      addItem("Pag-Ibig (3%)", pagIbig, true)
+      addItem("PhilHealth (2%)", philHealth, true);
+      addItem("Tax (5%)", tax, true);
+      addItem("Total Deduction (15%)", totalDeduction);
+      addItem("Net Pay", netPay);
+      let button = document.createElement("button");
+      button.textContent = "Go Back";
+      button.type = "button";
+      button.id = "back-button";
+      button.onclick = () => window.history.back();
+      payroll.appendChild(button)
+    </script>
+  </body>
+</html>
